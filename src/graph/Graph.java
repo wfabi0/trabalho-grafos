@@ -28,6 +28,9 @@ public class Graph {
     }
 
     public String printAdjacencies() {
+        if (adjVertices.isEmpty()) {
+            return "Grafo vazio, crie um antes de utilizar essa função.";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Integer, List<Edge>> entry : adjVertices.entrySet()) {
             stringBuilder.append(entry.getKey()).append(" -> ").append(entry.getValue()).append("\n");
@@ -83,11 +86,20 @@ public class Graph {
         return adjVertices;
     }
 
-    public Map<Integer,int[]> getCoordinates() {
+    public Map<Integer, int[]> getCoordinates() {
         return coordinates;
+    }
+
+    public boolean isDirected() {
+        return directed;
     }
 
     public void setDirected(boolean directed) {
         this.directed = directed;
+    }
+
+    public void clear() {
+        adjVertices.clear();
+        coordinates.clear();
     }
 }

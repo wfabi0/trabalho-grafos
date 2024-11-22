@@ -1,26 +1,28 @@
 package file;
 
+import graph.Edge;
 import graph.Graph;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class FileManager {
 
-    public FileManager(String fileName, Graph graph) {
+    Graph graph;
+
+    public FileManager(Graph graph) {
+        this.graph = graph;
+    }
+
+    public void importFile(String fileName) throws Exception {
         File file = new File(fileName);
         if (!file.exists()) {
-            try {
-                file.createNewFile();
-                System.out.println("Arquivo " + fileName + " criado automaticamente.");
-                FileWriter writer = getFileWriter(file);
-                writer.close();
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
+            throw new Exception("O arquivo não existe.");
         }
 
         try {
@@ -56,7 +58,6 @@ public class FileManager {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
     }
 
     private FileWriter getFileWriter(File file) throws IOException {
@@ -85,6 +86,39 @@ public class FileManager {
         writer.write(writeLine("7 8 8"));
         writer.write(writeLine("8 9 39"));
         return writer;
+    }
+
+    public void exportFile(String fileName) {
+        File file = new File(fileName);
+        try {
+            FileWriter writer = new FileWriter(file, false);
+            writer.write(writeLine("direcionado=" + (graph.isDirected() ? "sim" : "nao")));
+
+            Map<Integer, int[]> coordinates = graph.getCoordinates();
+            writer.write(writeLine(String.valueOf(coordinates.size())));
+            for (Map.Entry<Integer, int[]> entry : coordinates.entrySet()) {
+                int vertex = entry.getKey();
+                int[] coords = entry.getValue();
+                writer.write(writeLine(vertex + " " + coords[0] + " " + coords[1]));
+            }
+
+            Map<Integer, List<Edge>> adjVertices = graph.getAdjVertices();
+            int edgeCount = adjVertices.values().stream().mapToInt(List::size).sum() / (graph.isDirected() ? 1 : 2); // evitar problemas caso nao seja direcionado
+            writer.write(writeLine(String.valueOf(edgeCount)));
+
+            for (Map.Entry<Integer, List<Edge>> entry : adjVertices.entrySet()) {
+                int source = entry.getKey();
+                for (Edge edge : entry.getValue()) {
+                    if (graph.isDirected() || source < edge.destination) {
+                        writer.write(writeLine(source + " " + edge.destination + " " + edge.weight));
+                    }
+                }
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private String writeLine(String str) {
