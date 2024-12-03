@@ -238,7 +238,7 @@ public class MenuApp {
             } else {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Edge edge : edges) {
-                    stringBuilder.append(edges.toString()).append("\n");
+                    stringBuilder.append(edge.toString()).append("\n");
                 }
                 JOptionPane.showMessageDialog(null, stringBuilder, "Grafo - Lista de Adjacentes de " + vertex, JOptionPane.PLAIN_MESSAGE);
             }
