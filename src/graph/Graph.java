@@ -16,10 +16,11 @@ public class Graph {
         this.coordinates = new HashMap<>();
     }
 
-    public void createEmptyGraph(int numVertices) {
+    public void createEmptyGraph(int numVertices, boolean directed) {
         for (int i = 0; i < numVertices; i++) {
             addVertex(i, 0, 0);
         }
+        this.directed = directed;
     }
 
     public void addVertex(int vertex, int x, int y) {

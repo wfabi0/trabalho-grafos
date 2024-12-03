@@ -127,8 +127,9 @@ public class MenuApp {
     private void emptyGraph() {
         try {
             int vertexSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o número de vértices", "Grafo - Criar", JOptionPane.QUESTION_MESSAGE));
+            int direction = Integer.parseInt(JOptionPane.showInputDialog(null, "O grafo é direcionado? (1 - Sim | 2 - Não)", "Grafo - Criar", JOptionPane.QUESTION_MESSAGE));
             graph.clear();
-            graph.createEmptyGraph(vertexSize);
+            graph.createEmptyGraph(vertexSize, (direction == 1));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Criar", JOptionPane.ERROR_MESSAGE);
         }
