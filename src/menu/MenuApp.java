@@ -34,7 +34,7 @@ public class MenuApp {
                 "10. Consultar o próximo adjacente de um vértice a partir de um adjacente\n" +
                 "11. Consultar a lista completa de adjacentes de um vértice\n" +
                 "12. Exportar grafo\n" +
-                "13. Exibir grafo\n" +
+//                "13. Exibir grafo\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -94,10 +94,10 @@ public class MenuApp {
                         exportGraph();
                         break;
                     }
-                    case 13: {
-                        saveGraphToImage();
-                        break;
-                    }
+//                    case 13: {
+//                        saveGraphToImage();
+//                        break;
+//                    }
                     case 0: {
                         exit();
                         return;
