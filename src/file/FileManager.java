@@ -6,10 +6,7 @@ import graph.Graph;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileManager {
 
@@ -39,7 +36,9 @@ public class FileManager {
                         int vertex = Integer.parseInt(vertexInfo[0]);
                         int x = Integer.parseInt(vertexInfo[1]);
                         int y = Integer.parseInt(vertexInfo[2]);
-                        graph.addVertex(vertex, x, y);
+                        String[] subArray = Arrays.copyOfRange(vertexInfo, 3, vertexInfo.length);
+                        String name = String.join(" ", subArray);
+                        graph.addVertex(vertex, x, y, name);
                     }
 
                     if (scanner.hasNextLine()) {
@@ -65,15 +64,15 @@ public class FileManager {
         writer.write(writeLine("direcionado=nao"));
         writer.write(writeLine("10"));
         writer.write(writeLine("0 1 1"));
-        writer.write(writeLine("1 50 20"));
-        writer.write(writeLine("2 10 30"));
-        writer.write(writeLine("3 12 50"));
-        writer.write(writeLine("4 15 70"));
-        writer.write(writeLine("5 20 90"));
-        writer.write(writeLine("6 25 11"));
-        writer.write(writeLine("7 30 12"));
-        writer.write(writeLine("8 35 15"));
-        writer.write(writeLine("9 40 20"));
+        writer.write(writeLine("1 50 20 Mons Agnes"));
+        writer.write(writeLine("2 10 30 Vladivostok"));
+        writer.write(writeLine("3 12 50 Mount Gundabad"));
+        writer.write(writeLine("4 15 70 Mons La Hire"));
+        writer.write(writeLine("5 20 90 Coruscant"));
+        writer.write(writeLine("6 25 11 Mons Wolf"));
+        writer.write(writeLine("7 30 12 Cafarnaun"));
+        writer.write(writeLine("8 35 15 Mons Vitruvius"));
+        writer.write(writeLine("9 40 20 Qorikancha"));
         writer.write(writeLine("10"));
         writer.write(writeLine("0 1 50"));
         writer.write(writeLine("0 9 20"));

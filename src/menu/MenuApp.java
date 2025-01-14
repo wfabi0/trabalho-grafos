@@ -35,6 +35,7 @@ public class MenuApp {
                 "11. Consultar a lista completa de adjacentes de um vértice\n" +
                 "12. Exportar grafo\n" +
                 "13. Exibir grafo\n" +
+                "14. Editar nome de vértice\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -94,8 +95,12 @@ public class MenuApp {
                         exportGraph();
                         break;
                     }
-                    case 13: {
-                        saveGraphToImage();
+//                    case 13: {
+//                        saveGraphToImage();
+//                        break;
+//                    }
+                    case 14: {
+                        editVertexNames();
                         break;
                     }
                     case 0: {
@@ -120,6 +125,7 @@ public class MenuApp {
             fileManager.importFile(fileName);
             JOptionPane.showMessageDialog(null, "Arquivo importado com sucesso.", "Grafo - Importar", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Importar", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -265,6 +271,18 @@ public class MenuApp {
             JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!", "Salvar Imagem", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar a imagem.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void editVertexNames() {
+        try {
+            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice", "Grafo - Editar Nome", JOptionPane.QUESTION_MESSAGE));
+            int x = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a nova coodenada de X", "Grafo - Editar Coordenadas", JOptionPane.QUESTION_MESSAGE));
+            int y = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a nova coodenada de Y", "Grafo - Editar Coordenadas", JOptionPane.QUESTION_MESSAGE));
+            graph.setVertexCoordinates(vertex, x, y);
+            JOptionPane.showMessageDialog(null, "Coordenada editada com sucesso.", "Grafo - Editar Coordenadas", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Editar Coordenadas", JOptionPane.ERROR_MESSAGE);
         }
     }
 

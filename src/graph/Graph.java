@@ -9,22 +9,25 @@ public class Graph {
 
     private Map<Integer, List<Edge>> adjVertices;
     private Map<Integer, int[]> coordinates;
+    private Map<Integer, String> names;
     private boolean directed;
 
     public Graph() {
         this.adjVertices = new HashMap<>();
         this.coordinates = new HashMap<>();
+        this.names = new HashMap<>();
     }
 
     public void createEmptyGraph(int numVertices) {
         for (int i = 0; i < numVertices; i++) {
-            addVertex(i, 0, 0);
+            addVertex(i, 0, 0, null);
         }
     }
 
-    public void addVertex(int vertex, int x, int y) {
+    public void addVertex(int vertex, int x, int y, String name) {
         adjVertices.putIfAbsent(vertex, new ArrayList<>());
         coordinates.put(vertex, new int[]{x, y});
+        names.put(vertex, name);
     }
 
     public String printAdjacencies() {
@@ -32,8 +35,11 @@ public class Graph {
             return "Grafo vazio, crie um antes de utilizar essa função.";
         }
         StringBuilder stringBuilder = new StringBuilder();
+        int i = 0;
         for (Map.Entry<Integer, List<Edge>> entry : adjVertices.entrySet()) {
-            stringBuilder.append(entry.getKey()).append(" -> ").append(entry.getValue()).append("\n");
+            String name = names.get(entry.getKey()).toString();
+            stringBuilder.append(entry.getKey()).append(name.length() > 0 ? (" (" + name  + ")") : "").append(" -> ").append(entry.getValue()).append("\n");
+            i++;
         }
         return stringBuilder.toString();
     }
@@ -63,6 +69,10 @@ public class Graph {
 
     public void setVertexCoordinates(int vertex, int x, int y) {
         coordinates.put(vertex, new int[]{x, y});
+    }
+
+    public void setVertexName(int vertex, String name) {
+        names.put(vertex, name);
     }
 
     public Edge getFirstAdjacent(int vertex) {
