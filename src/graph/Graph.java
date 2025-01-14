@@ -1,9 +1,6 @@
 package graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
 
@@ -88,6 +85,25 @@ public class Graph {
         return null;
     }
 
+    public Set<Integer> DFS(int vertex) {
+        Set<Integer> visiteds = new HashSet<>();
+        for (int i = 0; i < adjVertices.size(); i++) {
+            System.out.println(adjVertices.get(i));
+        }
+        DFSRec(vertex, visiteds);
+        return visiteds;
+    }
+
+    private void DFSRec(int vertex, Set<Integer> visiteds) {
+        visiteds.add(vertex);
+        System.out.println("Visitando vértice: " + vertex + (names.get(vertex) != null ? "(" + names.get(vertex) + ") " : ""));
+        for (Edge edge : adjVertices.getOrDefault(vertex, new ArrayList<>())) {
+            if (!visiteds.contains(edge.destination)) {
+                DFSRec(edge.destination, visiteds);
+            }
+        }
+    }
+
     public List<Edge> getAdjacents(int vertex) {
         return adjVertices.getOrDefault(vertex, new ArrayList<>());
     }
@@ -111,5 +127,6 @@ public class Graph {
     public void clear() {
         adjVertices.clear();
         coordinates.clear();
+        names.clear();
     }
 }

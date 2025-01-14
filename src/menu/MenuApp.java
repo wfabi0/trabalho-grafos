@@ -103,6 +103,10 @@ public class MenuApp {
                         editVertexNames();
                         break;
                     }
+                    case 15: {
+                        DFS();
+                        break;
+                    }
                     case 0: {
                         exit();
                         return;
@@ -282,6 +286,16 @@ public class MenuApp {
             JOptionPane.showMessageDialog(null, "Nome editado com sucesso.", "Grafo - Editar Nome", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Editar Nome", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void DFS() {
+        try {
+            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Busca em profundidade", JOptionPane.QUESTION_MESSAGE));
+            graph.DFS(vertex);
+            JOptionPane.showMessageDialog(null, "Nome editado com sucesso.", "Grafo - Busca em profundidade", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Busca em profundidade", JOptionPane.ERROR_MESSAGE);
         }
     }
 
