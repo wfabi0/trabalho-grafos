@@ -277,12 +277,11 @@ public class MenuApp {
     private void editVertexNames() {
         try {
             int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice", "Grafo - Editar Nome", JOptionPane.QUESTION_MESSAGE));
-            int x = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a nova coodenada de X", "Grafo - Editar Coordenadas", JOptionPane.QUESTION_MESSAGE));
-            int y = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira a nova coodenada de Y", "Grafo - Editar Coordenadas", JOptionPane.QUESTION_MESSAGE));
-            graph.setVertexCoordinates(vertex, x, y);
-            JOptionPane.showMessageDialog(null, "Coordenada editada com sucesso.", "Grafo - Editar Coordenadas", JOptionPane.PLAIN_MESSAGE);
+            String name = JOptionPane.showInputDialog(null, "Insira o novo nome do vértice", "Grafo - Editar Nome", JOptionPane.QUESTION_MESSAGE);
+            graph.setVertexName(vertex, name);
+            JOptionPane.showMessageDialog(null, "Nome editado com sucesso.", "Grafo - Editar Nome", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
-            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Editar Coordenadas", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Editar Nome", JOptionPane.ERROR_MESSAGE);
         }
     }
 
