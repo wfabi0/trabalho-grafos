@@ -85,21 +85,59 @@ public class Graph {
         return null;
     }
 
-    public Set<Integer> DFS(int vertex) {
+    public String DFS(int vertex) {
         Set<Integer> visiteds = new HashSet<>();
-        for (int i = 0; i < adjVertices.size(); i++) {
-            System.out.println(adjVertices.get(i));
+        StringBuilder stringBuilder = new StringBuilder();
+        DFSRec(vertex, visiteds, stringBuilder);
+        for (Integer vx : adjVertices.keySet()) {
+            if (!visiteds.contains(vx)) {
+                stringBuilder.append("\n\n");
+                DFSRec(vx, visiteds, stringBuilder);
+            }
         }
-        DFSRec(vertex, visiteds);
-        return visiteds;
+        return stringBuilder.toString();
     }
 
-    private void DFSRec(int vertex, Set<Integer> visiteds) {
+    private void DFSRec(int vertex, Set<Integer> visiteds, StringBuilder stringBuilder) {
         visiteds.add(vertex);
-        System.out.println("Visitando vértice: " + vertex + (names.get(vertex) != null ? "(" + names.get(vertex) + ") " : ""));
+        stringBuilder.append(vertex).append((names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : ""));
+//        System.out.println("Visitando vértice: " + vertex + (names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : ""));
         for (Edge edge : adjVertices.getOrDefault(vertex, new ArrayList<>())) {
             if (!visiteds.contains(edge.destination)) {
-                DFSRec(edge.destination, visiteds);
+                stringBuilder.append(" -> ");
+                DFSRec(edge.destination, visiteds, stringBuilder);
+            }
+        }
+    }
+
+    public String BFS(int vertex) {
+        Set<Integer> visiteds = new HashSet<>();
+        Queue<Integer> queue = new LinkedList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        BFSRec(vertex, visiteds, queue, stringBuilder);
+        for (Integer vx : adjVertices.keySet()) {
+            if (!visiteds.contains(vx)) {
+                stringBuilder.append("\n\n");
+                BFSRec(vx, visiteds, queue, stringBuilder);
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    private void BFSRec(int vertex, Set<Integer> visiteds, Queue<Integer> queue, StringBuilder stringBuilder) {
+        queue.add(vertex);
+        visiteds.add(vertex);
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            stringBuilder.append(curr);
+            for (Edge neighbor : adjVertices.getOrDefault(curr, new ArrayList<>())) {
+                if (!visiteds.contains(neighbor.destination)) {
+                    queue.add(neighbor.destination);
+                    visiteds.add(neighbor.destination);
+                }
+            }
+            if(queue.size() > 0) {
+                stringBuilder.append(" -> ");
             }
         }
     }

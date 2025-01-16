@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MenuApp {
 
@@ -36,6 +37,8 @@ public class MenuApp {
                 "12. Exportar grafo\n" +
                 "13. Exibir grafo\n" +
                 "14. Editar nome de vértice\n" +
+                "15. Busca em profundidade\n" +
+                "16. Busca em largura\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -95,16 +98,20 @@ public class MenuApp {
                         exportGraph();
                         break;
                     }
-//                    case 13: {
-//                        saveGraphToImage();
-//                        break;
-//                    }
+                    case 13: {
+                        saveGraphToImage();
+                        break;
+                    }
                     case 14: {
                         editVertexNames();
                         break;
                     }
                     case 15: {
                         DFS();
+                        break;
+                    }
+                    case 16: {
+                        BFS();
                         break;
                     }
                     case 0: {
@@ -292,10 +299,20 @@ public class MenuApp {
     private void DFS() {
         try {
             int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Busca em profundidade", JOptionPane.QUESTION_MESSAGE));
-            graph.DFS(vertex);
-            JOptionPane.showMessageDialog(null, "Nome editado com sucesso.", "Grafo - Busca em profundidade", JOptionPane.PLAIN_MESSAGE);
+            String DFS = graph.DFS(vertex);
+            JOptionPane.showMessageDialog(null, (DFS), "Grafo - Busca em profundidade", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Busca em profundidade", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void BFS() {
+        try {
+            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Busca em largura", JOptionPane.QUESTION_MESSAGE));
+            String BFS = graph.BFS(vertex);
+            JOptionPane.showMessageDialog(null, (BFS), "Grafo - Busca em largura", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Busca em largura", JOptionPane.ERROR_MESSAGE);
         }
     }
 
