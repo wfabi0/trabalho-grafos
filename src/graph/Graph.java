@@ -1,5 +1,7 @@
 package graph;
 
+import algorithm.Kruskals;
+
 import java.util.*;
 
 public class Graph {
@@ -8,6 +10,7 @@ public class Graph {
     private Map<Integer, int[]> coordinates;
     private Map<Integer, String> names;
     private boolean directed;
+    private Kruskals kruskals = new Kruskals(this);
 
     public Graph() {
         this.adjVertices = new HashMap<>();
