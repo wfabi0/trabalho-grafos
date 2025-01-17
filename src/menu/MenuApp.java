@@ -7,8 +7,8 @@ import graph.Graph;
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class MenuApp {
 
@@ -39,6 +39,7 @@ public class MenuApp {
                 "14. Editar nome de vértice\n" +
                 "15. Busca em profundidade\n" +
                 "16. Busca em largura\n" +
+                "17. Algoritmo de Kruskal\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -112,6 +113,10 @@ public class MenuApp {
                     }
                     case 16: {
                         BFS();
+                        break;
+                    }
+                    case 17: {
+                        MST();
                         break;
                     }
                     case 0: {
@@ -191,7 +196,7 @@ public class MenuApp {
             for (int i = 0; i < size; i++) {
                 int destination = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o destino da " + (i + 1) + "° aresta", "Grafo - Adicionar Múltiplas Aresta", JOptionPane.QUESTION_MESSAGE));
                 double weight = Double.parseDouble(JOptionPane.showInputDialog(null, "Insira o peso da " + (i + 1) + "° aresta", "Grafo - Adicionar Múltiplas Aresta", JOptionPane.QUESTION_MESSAGE));
-                edges.add(new Edge(destination, weight));
+                edges.add(new Edge(source, destination, weight));
             }
 
             graph.addEdges(source, edges);
@@ -313,6 +318,20 @@ public class MenuApp {
             JOptionPane.showMessageDialog(null, (BFS), "Grafo - Busca em largura", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Busca em largura", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void MST() {
+        ArrayList<Edge> mst = graph.getKruskals().MST();
+        Double cb = graph.getKruskals().totalWeight(mst);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Edge edge : mst) {
+            stringBuilder.append(edge.toKruskalString()).append(", ");
+        }
+        try {
+            JOptionPane.showMessageDialog(null, (stringBuilder.toString() + "\n\nSoma dos pesos: " + cb), "Grafo - Algoritmo de Kruskal", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Kruskal", JOptionPane.ERROR_MESSAGE);
         }
     }
 

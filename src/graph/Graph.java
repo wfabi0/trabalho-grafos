@@ -10,7 +10,7 @@ public class Graph {
     private Map<Integer, int[]> coordinates;
     private Map<Integer, String> names;
     private boolean directed;
-    private Kruskals kruskals = new Kruskals(this);
+    private final Kruskals kruskals = new Kruskals(this);
 
     public Graph() {
         this.adjVertices = new HashMap<>();
@@ -20,7 +20,7 @@ public class Graph {
 
     public void createEmptyGraph(int numVertices) {
         for (int i = 0; i < numVertices; i++) {
-            addVertex(i, 0, 0, null);
+            addVertex(i, 0, 0, "");
         }
     }
 
@@ -51,8 +51,8 @@ public class Graph {
     public void addEdge(int source, int destination, double weight) {
         adjVertices.putIfAbsent(source, new ArrayList<>());
         adjVertices.putIfAbsent(destination, new ArrayList<>());
-        adjVertices.get(source).add(new Edge(destination, weight));
-        if (!directed) adjVertices.get(destination).add(new Edge(source, weight));
+        adjVertices.get(source).add(new Edge(source, destination, weight));
+        if (!directed) adjVertices.get(destination).add(new Edge(destination, source, weight));
     }
 
     public void addEdges(int source, List<Edge> edges) {
@@ -153,6 +153,19 @@ public class Graph {
         return adjVertices;
     }
 
+    public ArrayList<Edge> getAllEdges() {
+        ArrayList<Edge> edges = new ArrayList<>();
+        for (Map.Entry<Integer, List<Edge>> entry : adjVertices.entrySet()) {
+            int source = entry.getKey();
+            for (Edge edge : entry.getValue()) {
+                if (!edges.contains(edge)) {
+                    edges.add(new Edge(source, edge.destination, edge.weight));
+                }
+            }
+        }
+        return edges;
+    }
+
     public Map<Integer, int[]> getCoordinates() {
         return coordinates;
     }
@@ -169,5 +182,9 @@ public class Graph {
         adjVertices.clear();
         coordinates.clear();
         names.clear();
+    }
+
+    public Kruskals getKruskals() {
+        return kruskals;
     }
 }

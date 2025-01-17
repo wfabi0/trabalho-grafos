@@ -1,5 +1,5 @@
-direcionado=sim
-8
+direcionado=nao
+7
 0 0 0 Mons Agnes
 1 0 0 Vladivostok
 2 0 0 Mount Gundabad
@@ -7,15 +7,16 @@ direcionado=sim
 4 0 0 Coruscant
 5 0 0 Mons Wolf
 6 0 0 Cafarnaun
-7 0 0 Mons Vitruvius
-10
-0 1 1
-1 4 1
-4 1 1
-4 7 1
-0 4 1
-0 2 1
-2 4 1
-2 3 1
-3 4 1
-5 6 1
+12
+0 2 7
+0 4 10
+0 5 2
+0 3 9
+2 4 4
+2 6 7
+2 3 3
+3 1 5
+4 1 6
+5 1 4
+5 4 9
+6 5 8
