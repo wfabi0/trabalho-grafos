@@ -14,8 +14,10 @@ public class Kruskals {
     }
 
     public ArrayList<Edge> MST() {
+        System.out.println("Iniciando algoritmo de Kruskals");
         ArrayList<Edge> mst = new ArrayList<>();
         ArrayList<Edge> edges = graph.getAllEdges();
+        System.out.println("Ordenando vértices por peso");
         edges.sort(Comparator.comparingDouble(edge -> edge.weight));
         Map<Integer, Integer> parent = new HashMap<>();
         Map<Integer, Integer> rank = new HashMap<>();
@@ -38,8 +40,10 @@ public class Kruskals {
     }
 
     private void union(Map<Integer, Integer> parent, Map<Integer, Integer> rank, int v1, int v2) {
+        System.out.println("Unindo conjuntos " + v1 + " e " + v2);
         int root1 = findRoot(parent, v1);
         int root2 = findRoot(parent, v2);
+        System.out.println("Comparando conjuntos " + root1 + " e " + root2);
         if (root1 != root2) {
             if (rank.get(root1) > rank.get(root2)) {
                 parent.put(root2, root1);
@@ -53,6 +57,7 @@ public class Kruskals {
     }
 
     private Integer findRoot(Map<Integer, Integer> parent, int vertex) {
+        System.out.println("Procurando raiz de " + vertex);
         if (parent.get(vertex) != vertex) {
             parent.put(vertex, findRoot(parent, parent.get(vertex)));
         }
@@ -60,7 +65,6 @@ public class Kruskals {
     }
 
     public Double totalWeight(ArrayList<Edge> mst) {
-        System.out.println(mst);
         double sum = 0;
         for (Edge edge : mst) {
             sum += edge.weight;
