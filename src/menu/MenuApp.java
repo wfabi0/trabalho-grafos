@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MenuApp {
 
@@ -41,6 +42,7 @@ public class MenuApp {
                 "16. Busca em largura\n" +
                 "17. Algoritmo de Kruskals\n" +
                 "18. Algoritmo de Prim\n" +
+                "19. Algoritmo de Dijkstra\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -122,6 +124,10 @@ public class MenuApp {
                     }
                     case 18: {
                         Prim_MST();
+                        break;
+                    }
+                    case 19: {
+                        Dijkstra_MST();
                         break;
                     }
                     case 0: {
@@ -352,6 +358,20 @@ public class MenuApp {
             JOptionPane.showMessageDialog(null, (stringBuilder.toString() + "\n\nSoma dos pesos: " + cb), "Grafo - Algoritmo de Prim", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Prim", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void Dijkstra_MST() {
+        try {
+            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Algoritmo de Dijkstra", JOptionPane.QUESTION_MESSAGE));
+            Map<Integer, Double> mst = graph.getDijkstra().sortPath(vertex);
+            StringBuilder stringBuilder = new StringBuilder("Menores distâncias a partir do vértice " + vertex + ": \n");
+            mst.forEach((v, distance) -> {
+                stringBuilder.append("Vértice ").append(v).append(": ").append(distance).append("\n");
+            });
+            JOptionPane.showMessageDialog(null, (stringBuilder.toString()), "Grafo - Algoritmo de Dijkstra", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Dijkstra", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -1,5 +1,6 @@
 package graph;
 
+import algorithm.Dijkstra;
 import algorithm.Kruskals;
 import algorithm.Prim;
 
@@ -13,6 +14,7 @@ public class Graph {
     private boolean directed;
     private final Kruskals kruskals = new Kruskals(this);
     private final Prim prim = new Prim(this);
+    private final Dijkstra dijkstra = new Dijkstra(this);
 
     public Graph() {
         this.adjVertices = new HashMap<>();
@@ -192,5 +194,9 @@ public class Graph {
 
     public Prim getPrim() {
         return prim;
+    }
+
+    public Dijkstra getDijkstra() {
+        return dijkstra;
     }
 }
