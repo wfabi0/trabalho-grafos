@@ -1,6 +1,7 @@
 package graph;
 
 import algorithm.Kruskals;
+import algorithm.Prim;
 
 import java.util.*;
 
@@ -11,6 +12,7 @@ public class Graph {
     private Map<Integer, String> names;
     private boolean directed;
     private final Kruskals kruskals = new Kruskals(this);
+    private final Prim prim = new Prim(this);
 
     public Graph() {
         this.adjVertices = new HashMap<>();
@@ -186,5 +188,9 @@ public class Graph {
 
     public Kruskals getKruskals() {
         return kruskals;
+    }
+
+    public Prim getPrim() {
+        return prim;
     }
 }

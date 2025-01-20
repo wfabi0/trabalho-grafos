@@ -4,7 +4,6 @@ import graph.Edge;
 import graph.Graph;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Kruskals {
     private final Graph graph;

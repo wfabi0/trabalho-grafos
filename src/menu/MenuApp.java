@@ -39,7 +39,8 @@ public class MenuApp {
                 "14. Editar nome de vértice\n" +
                 "15. Busca em profundidade\n" +
                 "16. Busca em largura\n" +
-                "17. Algoritmo de Kruskal\n" +
+                "17. Algoritmo de Kruskals\n" +
+                "18. Algoritmo de Prim\n" +
                 "0. Sair\n\n";
 
         int option;
@@ -116,7 +117,11 @@ public class MenuApp {
                         break;
                     }
                     case 17: {
-                        MST();
+                        Kruskal_MST();
+                        break;
+                    }
+                    case 18: {
+                        Prim_MST();
                         break;
                     }
                     case 0: {
@@ -321,7 +326,7 @@ public class MenuApp {
         }
     }
 
-    private void MST() {
+    private void Kruskal_MST() {
         ArrayList<Edge> mst = graph.getKruskals().MST();
         Double cb = graph.getKruskals().totalWeight(mst);
         StringBuilder stringBuilder = new StringBuilder();
@@ -332,6 +337,21 @@ public class MenuApp {
             JOptionPane.showMessageDialog(null, (stringBuilder.toString() + "\n\nSoma dos pesos: " + cb), "Grafo - Algoritmo de Kruskal", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Kruskal", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void Prim_MST() {
+        try {
+            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Algoritmo de Prim", JOptionPane.QUESTION_MESSAGE));
+            ArrayList<Edge> mst = graph.getPrim().MST(vertex);
+            Double cb = graph.getPrim().totalWeight(mst);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Edge edge : mst) {
+                stringBuilder.append(edge.toKruskalString()).append(", ");
+            }
+            JOptionPane.showMessageDialog(null, (stringBuilder.toString() + "\n\nSoma dos pesos: " + cb), "Grafo - Algoritmo de Prim", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception ignore) {
+            JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Prim", JOptionPane.ERROR_MESSAGE);
         }
     }
 
