@@ -124,32 +124,42 @@ public class Graph {
     public String BFS(int vertex) {
         Set<Integer> visiteds = new HashSet<>();
         Queue<Integer> queue = new LinkedList<>();
+        Map<Integer, Integer> distanceMap = new HashMap<>();
         StringBuilder stringBuilder = new StringBuilder();
-        BFSRec(vertex, visiteds, queue, stringBuilder);
+        distanceMap.put(vertex, 0);
+        BFSRec(vertex, visiteds, queue, stringBuilder, distanceMap);
         for (Integer vx : adjVertices.keySet()) {
             if (!visiteds.contains(vx)) {
                 stringBuilder.append("\n\n");
-                BFSRec(vx, visiteds, queue, stringBuilder);
+                BFSRec(vx, visiteds, queue, stringBuilder, distanceMap);
             }
+        }
+        for (Map.Entry<Integer, Integer> entry : distanceMap.entrySet()) {
+            stringBuilder.append("\nDistância do vértice " + entry.getKey() + " ao vértice inicial: " + entry.getValue());
         }
         return stringBuilder.toString();
     }
 
-    private void BFSRec(int vertex, Set<Integer> visiteds, Queue<Integer> queue, StringBuilder stringBuilder) {
+    private void BFSRec(int vertex, Set<Integer> visiteds, Queue<Integer> queue, StringBuilder stringBuilder, Map<Integer, Integer> distanceMap) {
         queue.add(vertex);
         visiteds.add(vertex);
+        System.out.println("Descoberto vértice: " + vertex);
         while (!queue.isEmpty()) {
             int curr = queue.poll();
             stringBuilder.append(curr);
+            System.out.println("Processando vértice: " + curr);
             for (Edge neighbor : adjVertices.getOrDefault(curr, new ArrayList<>())) {
                 if (!visiteds.contains(neighbor.destination)) {
                     queue.add(neighbor.destination);
                     visiteds.add(neighbor.destination);
+                    distanceMap.put(neighbor.destination, distanceMap.get(curr) + 1);
+                    System.out.println("Descoberto vizinho: " + neighbor.destination);
                 }
             }
-            if(queue.size() > 0) {
+            if(!queue.isEmpty()) {
                 stringBuilder.append(" -> ");
             }
+            System.out.println("Finalizado processamento do vértice: " + curr);
         }
     }
 
