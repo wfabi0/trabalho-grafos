@@ -95,26 +95,30 @@ public class Graph {
     public String DFS(int vertex) {
         Set<Integer> visiteds = new HashSet<>();
         StringBuilder stringBuilder = new StringBuilder();
-        DFSRec(vertex, visiteds, stringBuilder);
+        int[] timeCounter = {1};
+        DFSRec(vertex, visiteds, stringBuilder, timeCounter);
         for (Integer vx : adjVertices.keySet()) {
             if (!visiteds.contains(vx)) {
                 stringBuilder.append("\n\n");
-                DFSRec(vx, visiteds, stringBuilder);
+                DFSRec(vx, visiteds, stringBuilder, timeCounter);
             }
         }
         return stringBuilder.toString();
     }
 
-    private void DFSRec(int vertex, Set<Integer> visiteds, StringBuilder stringBuilder) {
+    private void DFSRec(int vertex, Set<Integer> visiteds, StringBuilder stringBuilder, int[] timeCounter) {
+        int startTime = timeCounter[0]++;
         visiteds.add(vertex);
         stringBuilder.append(vertex).append((names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : ""));
-//        System.out.println("Visitando vértice: " + vertex + (names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : ""));
+        System.out.println("Descoberto vértice: " + vertex + " no tempo " + startTime + (names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ")" : ""));
         for (Edge edge : adjVertices.getOrDefault(vertex, new ArrayList<>())) {
             if (!visiteds.contains(edge.destination)) {
                 stringBuilder.append(" -> ");
-                DFSRec(edge.destination, visiteds, stringBuilder);
+                DFSRec(edge.destination, visiteds, stringBuilder, timeCounter);
             }
         }
+        int finishTime = timeCounter[0]++;
+        System.out.println("Finalizado vértice: " + vertex + (names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : "") + "no tempo " + finishTime);
     }
 
     public String BFS(int vertex) {

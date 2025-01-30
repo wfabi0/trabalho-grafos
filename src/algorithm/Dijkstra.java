@@ -12,6 +12,8 @@ public class Dijkstra {
         this.graph = graph;
     }
 
+    // f) implemente o algoritmo de menor caminho (Dijkstra), de forma que o usuário possa calcular e visualizar textualmente o menor caminho entre um par de vértices digitando o nome deles;
+
     public Map<Integer, Double> sortPath(int startVertex) {
         System.out.println("Iniciando algoritmo de Dijkstra");
         Map<Integer, Double> distances = new HashMap<>();
