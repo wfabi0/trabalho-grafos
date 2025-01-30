@@ -13,10 +13,10 @@ public class Prim {
     }
 
     public ArrayList<Edge> MST(int startVertex) {
-        System.out.println("Iniciando algoritmo de Prim do vertex " + startVertex);
+        System.out.println("Iniciando algoritmo de Prim do vértice " + startVertex);
         ArrayList<Edge> mst = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
-        System.out.println("Iniciando heap do vertex " + startVertex);
+        System.out.println("Iniciando heap do vértice " + startVertex);
         PriorityQueue<Edge> minHeap = new PriorityQueue<>(Comparator.comparingDouble(edge -> edge.weight));
         visited.add(startVertex);
         System.out.println("Adicionando todos os adjacentes de " + startVertex + " no heap");
@@ -35,7 +35,6 @@ public class Prim {
                     minHeap.add(adjacentEdge);
                 }
             }
-
         }
         return mst;
     }
@@ -44,6 +43,7 @@ public class Prim {
         double sum = 0;
         for (Edge edge : mst) {
             sum += edge.weight;
+            System.out.println("Aresta " + edge.source + " - " + edge.destination + " | Peso: " + edge.weight);
         }
         return sum;
     }
