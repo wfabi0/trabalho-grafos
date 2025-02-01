@@ -64,3 +64,53 @@ direcionado=nao
 5 4 9
 6 5 8
 ```
+
+### Entrada2:
+```text
+direcionado=sim
+18
+0 5 5 Ronaldo
+1 10 10 Rosiney
+2 15 15 Rogerio
+3 20 20 Roberto
+4 25 25 Rafael
+5 30 30 Roni
+6 35 35 Reinaldo
+7 40 40 Raul
+8 45 45 Rosiana
+9 50 50 Ricardo
+10 55 55 Rosangela
+11 60 60 Rodrigol
+12 65 65 Rosineia
+13 70 70 Rafaela
+14 75 75 Rose
+15 80 80 Raimundo
+16 85 85 Rapucha
+17 90 90 Rosimar
+25
+0 1 5
+0 2 10
+1 3 7
+2 4 8
+3 5 6
+4 6 9
+5 7 12
+6 8 11
+7 9 15
+8 10 14
+9 11 13
+10 12 16
+11 13 17
+12 14 18
+13 15 19
+14 16 20
+15 17 21
+16 0 22
+17 1 23
+2 5 24
+3 7 25
+8 13 26
+9 16 27
+10 14 28
+11 15 29
+```
