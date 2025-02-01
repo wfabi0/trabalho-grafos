@@ -65,7 +65,7 @@ direcionado=nao
 6 5 8
 ```
 
-### Entrada2:
+#### Exemplo de entrada 2:
 ```text
 direcionado=sim
 18
