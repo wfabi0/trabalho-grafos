@@ -348,8 +348,7 @@ public class MenuApp {
 
     private void Prim_MST() {
         try {
-            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Algoritmo de Prim", JOptionPane.QUESTION_MESSAGE));
-            ArrayList<Edge> mst = graph.getPrim().MST(vertex);
+            ArrayList<Edge> mst = graph.getPrim().MST();
             Double cb = graph.getPrim().totalWeight(mst);
             StringBuilder stringBuilder = new StringBuilder();
             for (Edge edge : mst) {

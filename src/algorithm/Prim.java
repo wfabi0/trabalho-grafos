@@ -12,15 +12,19 @@ public class Prim {
         this.graph = graph;
     }
 
-    public ArrayList<Edge> MST(int startVertex) {
+    public ArrayList<Edge> MST() {
+        int startVertex = graph.getAdjVertices().keySet().iterator().next();
         System.out.println("Iniciando algoritmo de Prim do vértice " + startVertex);
+
         ArrayList<Edge> mst = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         System.out.println("Iniciando heap do vértice " + startVertex);
         PriorityQueue<Edge> minHeap = new PriorityQueue<>(Comparator.comparingDouble(edge -> edge.weight));
+
         visited.add(startVertex);
         System.out.println("Adicionando todos os adjacentes de " + startVertex + " no heap");
         minHeap.addAll(graph.getAdjVertices().get(startVertex));
+
         while (!minHeap.isEmpty() && mst.size() < graph.getAdjVertices().size() - 1) {
             Edge edge = minHeap.poll();
             if (visited.contains(edge.destination)) {
