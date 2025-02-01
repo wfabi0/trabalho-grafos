@@ -13,6 +13,7 @@ public class Prim {
     }
 
     public ArrayList<Edge> MST() {
+        System.out.println("\n-----------------------------\n");
         int startVertex = graph.getAdjVertices().keySet().iterator().next();
         System.out.println("Iniciando algoritmo de Prim do vértice " + startVertex);
 
@@ -49,6 +50,7 @@ public class Prim {
             sum += edge.weight;
             System.out.println("Aresta " + edge.source + " - " + edge.destination + " | Peso: " + edge.weight);
         }
+        System.out.println("\n-----------------------------\n");
         return sum;
     }
 }

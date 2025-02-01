@@ -93,6 +93,7 @@ public class Graph {
     }
 
     public String DFS(int vertex) {
+        System.out.println("\n-----------------------------\n");
         Set<Integer> visiteds = new HashSet<>();
         StringBuilder stringBuilder = new StringBuilder();
         int[] timeCounter = {1};
@@ -103,13 +104,14 @@ public class Graph {
                 DFSRec(vx, visiteds, stringBuilder, timeCounter);
             }
         }
+        System.out.println("\n-----------------------------\n");
         return stringBuilder.toString();
     }
 
     private void DFSRec(int vertex, Set<Integer> visiteds, StringBuilder stringBuilder, int[] timeCounter) {
         int startTime = timeCounter[0]++;
         visiteds.add(vertex);
-        stringBuilder.append(vertex).append((names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ") " : ""));
+        stringBuilder.append(vertex);
         System.out.println("Descoberto vértice: " + vertex + " no tempo " + startTime + (names.get(vertex).length() > 0 ? " (" + names.get(vertex) + ")" : ""));
         for (Edge edge : adjVertices.getOrDefault(vertex, new ArrayList<>())) {
             if (!visiteds.contains(edge.destination)) {
@@ -122,14 +124,17 @@ public class Graph {
     }
 
     public String BFS(int vertex) {
+        System.out.println("\n-----------------------------\n");
         Set<Integer> visiteds = new HashSet<>();
         Queue<Integer> queue = new LinkedList<>();
         Map<Integer, Integer> distanceMap = new HashMap<>();
         StringBuilder stringBuilder = new StringBuilder();
+        System.out.println("Iniciando BFS a partir do vértice " + vertex);
         distanceMap.put(vertex, 0);
         BFSRec(vertex, visiteds, queue, stringBuilder, distanceMap);
         for (Integer vx : adjVertices.keySet()) {
             if (!visiteds.contains(vx)) {
+                System.out.println("Vértice " + vx + " não visitado, iniciando BFS para novo componente conexo.");
                 stringBuilder.append("\n\n");
                 BFSRec(vx, visiteds, queue, stringBuilder, distanceMap);
             }
@@ -137,13 +142,16 @@ public class Graph {
         for (Map.Entry<Integer, Integer> entry : distanceMap.entrySet()) {
             stringBuilder.append("\nDistância do vértice " + entry.getKey() + " ao vértice inicial: " + entry.getValue());
         }
+        System.out.println("BFS finalizada.");
+        System.out.println("\n-----------------------------\n");
         return stringBuilder.toString();
     }
 
     private void BFSRec(int vertex, Set<Integer> visiteds, Queue<Integer> queue, StringBuilder stringBuilder, Map<Integer, Integer> distanceMap) {
+        System.out.println("Adicionando na fila vértice: " + vertex);
         queue.add(vertex);
         visiteds.add(vertex);
-        System.out.println("Descoberto vértice: " + vertex);
+        System.out.println("Descoberto vértice: " + vertex + " (distância: " + distanceMap.get(vertex) + ")");
         while (!queue.isEmpty()) {
             int curr = queue.poll();
             stringBuilder.append(curr);
@@ -182,6 +190,10 @@ public class Graph {
             }
         }
         return edges;
+    }
+
+    public Map<Integer, String> getNames() {
+        return new HashMap<>(this.names);
     }
 
     public Map<Integer, int[]> getCoordinates() {

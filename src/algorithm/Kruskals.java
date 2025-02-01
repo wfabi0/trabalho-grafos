@@ -13,6 +13,7 @@ public class Kruskals {
     }
 
     public ArrayList<Edge> MST() { // MOVIMENTO SEM TERRA / Arvore Geradora Minima
+        System.out.println("\n-----------------------------\n");
         System.out.println("Iniciando algoritmo de Kruskals");
         ArrayList<Edge> mst = new ArrayList<>();
         ArrayList<Edge> edges = graph.getAllEdges();
@@ -88,6 +89,7 @@ public class Kruskals {
             System.out.println("Aresta " + edge.source + " - " + edge.destination + " | Peso: " + edge.weight);
         }
         System.out.println("Peso total da MST: " + sum);
+        System.out.println("\n-----------------------------\n");
         return sum;
     }
 }

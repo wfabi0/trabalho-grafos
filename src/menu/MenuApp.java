@@ -362,10 +362,10 @@ public class MenuApp {
 
     private void Dijkstra_MST() {
         try {
-            int vertex = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o vértice inicial", "Grafo - Algoritmo de Dijkstra", JOptionPane.QUESTION_MESSAGE));
-            int vertex2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o segundo vértice", "Grafo - Algoritmo de Dijkstra", JOptionPane.QUESTION_MESSAGE));
+            String vertex = JOptionPane.showInputDialog(null, "Insira o nome do vértice inicial", "Grafo - Algoritmo de Dijkstra", JOptionPane.QUESTION_MESSAGE);
+            String vertex2 = JOptionPane.showInputDialog(null, "Insira o nome do segundo vértice", "Grafo - Algoritmo de Dijkstra", JOptionPane.QUESTION_MESSAGE);
             List<String> path = graph.getDijkstra().findShortestPath(vertex, vertex2);
-            JOptionPane.showMessageDialog(null, (path), "Grafo - Algoritmo de Dijkstra", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, (path.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "")), "Grafo - Algoritmo de Dijkstra", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception ignore) {
             JOptionPane.showMessageDialog(null, "Um erro ocorreu, provavelmente você não inseriu dados inválidos.", "Grafo - Algoritmo de Dijkstra", JOptionPane.ERROR_MESSAGE);
         }
