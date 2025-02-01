@@ -74,8 +74,22 @@ public class Dijkstra {
         if (totalDistance == 0.0 && startVertex != targetVertex) {
             System.out.println("Vértice de destino " + targetVertex + " (" + targetName + ") não foi alcançado.");
         }
-        result.add("Distância total: " + totalDistance);
+        result.add("Distância total: " + totalDistance + "\n\n");
         System.out.println("Distância total: " + totalDistance);
+        List<String> path = new ArrayList<>();
+        if (predecessors.containsKey(targetVertex)) {
+            Integer current = targetVertex;
+            while (current != null) {
+                path.add(names.get(current));
+                current = predecessors.get(current);
+            }
+            Collections.reverse(path);
+            System.out.println("Caminho final: " + String.join(" -> ", path));
+            result.add("Caminho final: " + String.join(" -> ", path) + "\n");
+        } else {
+            System.out.println("Não há caminho para o vértice de destino.");
+            result.add("Não há caminho para o vértice de destino.");
+        }
         System.out.println("\n-----------------------------\n");
         return result;
     }

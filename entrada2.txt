@@ -1,4 +1,4 @@
-direcionado=sim
+direcionado=nao
 18
 0 5 5 Pedro Santos
 1 15 10 Fábio Milagres
