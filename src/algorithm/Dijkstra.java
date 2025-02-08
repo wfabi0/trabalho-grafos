@@ -83,7 +83,7 @@ public class Dijkstra {
                 path.add(names.get(current));
                 current = predecessors.get(current);
             }
-            Collections.reverse(path);
+            Collections.reverse(path); // inverter lista
             System.out.println("Caminho final: " + String.join(" -> ", path));
             result.add("Caminho final: " + String.join(" -> ", path) + "\n");
         } else {
